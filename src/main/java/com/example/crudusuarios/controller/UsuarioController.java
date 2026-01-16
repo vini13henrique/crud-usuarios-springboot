@@ -1,12 +1,9 @@
-package com.example.crudusuarios;
+package com.example.crudusuarios.controller;
 
 import com.example.crudusuarios.model.Usuario;
 import com.example.crudusuarios.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,12 +15,17 @@ public class UsuarioController {
     private UsuarioRepository usuarioRepository;
 
     @GetMapping("/{id}")
-    public Usuario buscarPorid(@PathVariable int id){
+    public Usuario buscarPorid(@PathVariable Integer id){
         return usuarioRepository.findById(id).orElse(null);
     }
 
     @GetMapping("/lista")
     public List<Usuario> buscarTodosUsuarios(){
         return  usuarioRepository.findAll();
+    }
+
+    @PostMapping
+    public Usuario criarUsuario(@RequestBody Usuario usuario){
+        return usuarioRepository.save(usuario);
     }
 }
