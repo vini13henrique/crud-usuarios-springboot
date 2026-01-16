@@ -11,8 +11,12 @@ import java.util.List;
 @RequestMapping("/usuarios")
 public class UsuarioController {
 
-    @Autowired
+
     private UsuarioRepository usuarioRepository;
+
+    public UsuarioController(UsuarioRepository usuarioRepository) {
+        this.usuarioRepository = usuarioRepository;
+    }
 
     @GetMapping("/{id}")
     public Usuario buscarPorid(@PathVariable Integer id){
