@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
@@ -18,5 +20,10 @@ public class UsuarioController {
     @GetMapping("/{id}")
     public Usuario buscarPorid(@PathVariable int id){
         return usuarioRepository.findById(id).orElse(null);
+    }
+
+    @GetMapping("/lista")
+    public List<Usuario> buscarTodosUsuarios(){
+        return  usuarioRepository.findAll();
     }
 }
