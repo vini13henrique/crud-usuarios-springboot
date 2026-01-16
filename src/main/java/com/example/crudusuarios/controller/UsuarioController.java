@@ -28,4 +28,14 @@ public class UsuarioController {
     public Usuario criarUsuario(@RequestBody Usuario usuario){
         return usuarioRepository.save(usuario);
     }
+
+    @PutMapping("/{id}")
+    public Usuario atualizarUsuario(@PathVariable Integer id, @RequestBody Usuario usuarioAtualizado){
+        return  usuarioRepository.findById(id).map(usuario -> {
+            usuario.setNome(usuarioAtualizado.getNome());
+            usuario.setEmail(usuarioAtualizado.getEmail());
+            usuario.setIdade(usuarioAtualizado.getIdade());
+            return usuarioRepository.save(usuario);
+        }).orElse(null);
+    }
 }
